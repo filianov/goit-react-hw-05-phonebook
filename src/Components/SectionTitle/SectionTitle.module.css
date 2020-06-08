@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  padding: 8px 0;
+  width: 600px;
+  margin: 0 auto;
+  color: #3884ff;
+}
+
+.enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.enterActive {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+}
+
+.exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.exitActive {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+}
