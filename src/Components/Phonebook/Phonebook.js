@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+// import * as contactsActions from '../../redux/contactsActions';
 import PropTypes from 'prop-types';
 import styles from './Phonebook.module.css';
 import Button from '../Button/Button';
 import { CSSTransition } from 'react-transition-group';
 import Alert from '../Alert/Alert';
 import slideTransition from '../transitions/slideAlert.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 
-export default class Phonebook extends Component {
+class Phonebook extends Component {
   state = {
     name: '',
     number: '',
@@ -31,10 +34,10 @@ export default class Phonebook extends Component {
   };
 
   handleSubmit = e => {
+    const id = uuidv4();
     e.preventDefault();
-    this.props.onAddContact(this.state.name, this.state.number);
+    this.props.onAddContact({ ...this.state, id });
     this.setState({ name: '', number: '' });
-
   };
 
   handleEror = e => {
@@ -97,7 +100,19 @@ export default class Phonebook extends Component {
       </>
     );
   }
-}
+};
+
+
+const mapStateToProps = (state, props) => ({
+  contacts: state.contacts,
+});
+
+// const mapDispatchToProps = dispatch => ({
+//   addContact: ({ name, number, id }) => dispatch(contactsActions.addContact({ name, number, id })),
+//   removeContact: (contactId) => dispatch(contactsActions.removeContact(contactId)),
+// });
+
+export default connect(mapStateToProps, null)(Phonebook);
 
 Phonebook.defaultProps = {
   contacts: [],
