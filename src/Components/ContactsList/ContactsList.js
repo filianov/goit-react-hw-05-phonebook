@@ -3,7 +3,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import styles from './ContactsList.module.css';
 import slideTransition from '../transitions/slide.module.css';
-
+import ContactListItem from './ContactListItem/ContactListItem'
 
 const ContactList = ({ contacts, onRemoveContact }) => (
   <>
@@ -11,7 +11,9 @@ const ContactList = ({ contacts, onRemoveContact }) => (
 
       {contacts.map(({ id, name, number }) => (
         <CSSTransition key={id} timeout={250} unmountOnExit classNames={slideTransition}>
-          <li key={id} className={styles.item}>
+          <ContactListItem id={id} name={name} number={number} onRemoveContact={onRemoveContact}
+          />
+          {/* <li key={id} className={styles.item}>
             <div className={styles.content}><span>{name}</span><span>{number}</span></div>
             <button
               type="button"
@@ -20,7 +22,7 @@ const ContactList = ({ contacts, onRemoveContact }) => (
             >
               <div className={styles.close}>X</div>
             </button>
-          </li>
+          </li> */}
         </CSSTransition>
       ))}
     </TransitionGroup>
